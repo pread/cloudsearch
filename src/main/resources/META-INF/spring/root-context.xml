@@ -10,9 +10,7 @@
 	<!-- jetty profile bean definitions go here -->
     <beans profile="jetty">
         
-        <context:property-placeholder location="classpath:jpa.properties,
-                                                classpath:jms.properties,
-                                                classpath:client.properties,
+        <context:property-placeholder location="classpath:client.properties,
                                                 classpath:camel.properties"/>
 
 	</beans>
@@ -21,9 +19,7 @@
     <beans profile="development">
 
         <!--Provide message resource bundle -->
-        <context:property-placeholder location="classpath:jpa.properties,
-                                                classpath:jms.properties,
-                                                classpath:client.properties,
+        <context:property-placeholder location="classpath:client.properties,
                                                 classpath:camel.properties"/>
                               
 	</beans>
