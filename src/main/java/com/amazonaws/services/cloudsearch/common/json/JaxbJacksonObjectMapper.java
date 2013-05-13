@@ -29,7 +29,7 @@ public class JaxbJacksonObjectMapper extends ObjectMapper {
 		  super.getSerializationConfig()
 		       .withAnnotationIntrospector(introspector);
 
-		  //this.configure(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE, false);
+		  this.configure(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE, false);
 		  this.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		  this.configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS, false);
 	}
