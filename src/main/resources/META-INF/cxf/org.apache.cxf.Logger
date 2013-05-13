@@ -1,0 +1,2 @@
+# Switch CXF to instead use Log4J
+org.apache.cxf.common.logging.Log4jLogger
