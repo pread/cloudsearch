@@ -24,8 +24,6 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * This objects represents the delete type in an SDF
- * 
- * @author jmonette
  */
 @XmlType(name = "Delete")
 @XmlRootElement(name = "delete")

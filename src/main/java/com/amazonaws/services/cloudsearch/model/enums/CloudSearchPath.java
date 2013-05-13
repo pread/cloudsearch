@@ -4,8 +4,6 @@ import com.google.common.base.Objects;
 
 /**
  * This class defines constants for paths in cloudsearch
- *
- * @author jmonette
  */
 public enum CloudSearchPath {
     BATCH("batch"),

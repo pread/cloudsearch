@@ -25,9 +25,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
- * This objects represents the add type in an SDF
- * 
- * @author jmonette
+ * This objects represents the add type in an SDF.
  */
 @XmlType(name = "Add")
 @XmlRootElement(name = "add")

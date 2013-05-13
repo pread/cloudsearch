@@ -4,8 +4,6 @@ import com.google.common.base.Objects;
 
 /**
  * This class defines constants for the query params used in cloudsearch
- *
- * @author jmonette
  */
 public enum CloudSearchQueryParam {
 

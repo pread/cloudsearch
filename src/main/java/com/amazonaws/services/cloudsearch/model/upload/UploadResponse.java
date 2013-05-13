@@ -11,8 +11,6 @@ import java.util.List;
 
 /**
  * The Java object representation of the response return from Amazon cloudsearch when updating the domain
- *
- * @author jmonette
  */
 @XmlType(name = "Response")
 @XmlRootElement(name = "response")

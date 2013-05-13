@@ -4,8 +4,6 @@ import com.google.common.base.Objects;
 
 /**
  * This class defines constants for cloudsearch queries
- *
- * @author jmonette
  */
 public enum CloudSearchBoolean {
     AND("and"),

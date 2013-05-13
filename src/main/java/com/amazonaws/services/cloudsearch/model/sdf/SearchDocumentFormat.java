@@ -25,8 +25,6 @@ import java.util.List;
 
 /**
  * The Java object representation of the SDF document to upload to Amazon cloudsearch
- * 
- * @author jmonette
  */
 @XmlType(name = "Batch")
 @XmlRootElement(name = "batch")

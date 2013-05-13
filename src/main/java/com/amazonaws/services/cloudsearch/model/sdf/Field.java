@@ -9,8 +9,6 @@ import javax.xml.bind.annotation.XmlValue;
 
 /**
  * This object representation the fields to be indexed in the SDF
- * 
- * @author jmonette
  */
 @XmlType(name = "Field")
 @XmlRootElement(name = "field")
