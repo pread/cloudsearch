@@ -65,15 +65,24 @@ public class IntegrationCloudSearchTest {
 
         if (null != domainStatus) {
 
-            int start = 20;
             String query = "Star Wars";
             String returnFields = "actor%2Cdirector%2Ctitle%2Cyear%2Ctext_relevance";
             String facet = "genre";
-            SearchResponse searchResponse = cloudSearchService.cloudSearchRead(query, returnFields, start, facet);
 
             System.out.println("Number of searchable documents for " + domainStatus.getDomainName() + " is " + domainStatus.getNumSearchableDocs());
-            System.out.println("Found " + searchResponse.getFound().getCount() + " matches for query [" + query + "]");
-            System.out.println(searchResponse.getFound().getStart() + " is the start position for query [" + query + "]");
+            for(int start = 0; start < 10000; start=start+10) {
+
+                SearchResponse searchResponse = cloudSearchService.cloudSearchRead(query, returnFields, start, facet);
+
+                int count = searchResponse.getFound().getCount();
+                int hits = searchResponse.getFound().getHits().size();
+                System.out.println("Start position " + start + ". Found " + hits + " of " + count + " matches for query [" + query + "]");
+                if ((start + 10) > count || hits == 0) {
+                    break;
+                }
+
+            }
+
         }
 
     }
@@ -94,6 +103,7 @@ public class IntegrationCloudSearchTest {
 
         if (null != domainStatus) {
 
+            System.out.println("Number of searchable documents for " + domainStatus.getDomainName() + " is " + domainStatus.getNumSearchableDocs());
             int start = 0;
             String query = "(and actor:'Carrie Fisher' genre:'Horror')";
             // actor:'-Cushing+Harrison Ford'
@@ -101,9 +111,9 @@ public class IntegrationCloudSearchTest {
             String facet = "genre";
             SearchResponse searchResponse = cloudSearchService.cloudSearchBooleanQuery(query, returnFields, start, facet);
 
-            System.out.println("Number of searchable documents for " + domainStatus.getDomainName() + " is " + domainStatus.getNumSearchableDocs());
-            System.out.println("Found " + searchResponse.getFound().getCount() + " matches for query [" + query + "]");
-            System.out.println(searchResponse.getFound().getStart() + " is the start position for query [" + query + "]");
+            int count = searchResponse.getFound().getCount();
+            int hits = searchResponse.getFound().getHits().size();
+            System.out.println("Start position " + start + ". Found " + hits + " of " + count + " matches for query [" + query + "]");
         }
 
     }
@@ -124,15 +134,21 @@ public class IntegrationCloudSearchTest {
 
         if (null != domainStatus) {
 
-            int start = 20;
             String query = "(and director:'Lucas|Spielberg' (not actor:'\"Ford, Harrison\"'))";
             String returnFields = "actor%2Cdirector%2Ctitle%2Cyear%2Ctext_relevance";
             String facet = "genre";
-            SearchResponse searchResponse = cloudSearchService.cloudSearchBooleanQuery(query, returnFields, start, facet);
 
             System.out.println("Number of searchable documents for " + domainStatus.getDomainName() + " is " + domainStatus.getNumSearchableDocs());
-            System.out.println("Found " + searchResponse.getFound().getCount() + " matches for query [" + query + "]");
-            System.out.println(searchResponse.getFound().getStart() + " is the start position for query [" + query + "]");
+            for(int start = 0; start < 10000; start=start+10) {
+                SearchResponse searchResponse = cloudSearchService.cloudSearchBooleanQuery(query, returnFields, start, facet);
+                int count = searchResponse.getFound().getCount();
+                int hits = searchResponse.getFound().getHits().size();
+                System.out.println("Start position " + start + ". Found " + hits + " of " + count + " matches for query [" + query + "]");
+
+                if ((start + 10) > count || hits == 0) {
+                    break;
+                }
+            }
         }
 
     }
