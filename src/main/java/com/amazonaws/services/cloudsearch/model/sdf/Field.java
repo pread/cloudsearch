@@ -1,11 +1,12 @@
 package com.amazonaws.services.cloudsearch.model.sdf;
 
 import com.google.common.base.Objects;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import java.util.List;
 
 /**
  * This object representation the fields to be indexed in the SDF
@@ -13,32 +14,73 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlType(name = "Field")
 @XmlRootElement(name = "field")
 public class Field {
-    
-    /** The name of the field found */
-    @XmlAttribute(name = "name")
-    private String name;
 
-    /** The value of the field found */
-    @XmlValue
-    private String value;
+    /** The name of the field found */
+    @XmlAttribute(name = "title")
+    @JsonProperty("title")
+    private String title;
+
+    /** The name of the field found */
+    @XmlAttribute(name = "director")
+    @JsonProperty("director")
+    private String director;
+
+    /** The name of the field found */
+    @XmlAttribute(name = "year")
+    @JsonProperty("year")
+    private Integer year;
+
+    /** The name of the field found */
+    @XmlAttribute(name = "genre")
+    @JsonProperty("genre")
+    private List<String> genre;
+
+    /** The name of the field found */
+    @XmlAttribute(name = "actor")
+    @JsonProperty("actor")
+    private List<String> actor;
 
     /****************************** */
     /*    Getters and Setters       */
     /****************************** */
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(final String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getValue() {
-        return value;
+    public String getDirector() {
+        return director;
     }
-    
-    public void setValue(final String value) {
-        this.value = value;
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public List<String> getGenre() {
+        return genre;
+    }
+
+    public void setGenre(List<String> genre) {
+        this.genre = genre;
+    }
+
+    public List<String> getActor() {
+        return actor;
+    }
+
+    public void setActor(List<String> actor) {
+        this.actor = actor;
     }
 
     /**
@@ -48,8 +90,9 @@ public class Field {
      */
     @Override
     public int hashCode() {
-        return Objects.hashCode(name,
-                                value);
+        return Objects.hashCode(title,
+                                director,
+                                year);
     }
 
     /**
@@ -64,8 +107,9 @@ public class Field {
         if (obj == null || !(obj instanceof Field)) {return false;}
 
         final Field that = (Field) obj;
-        return Objects.equal(this.name, that.name)
-            && Objects.equal(this.value, that.value);
+        return Objects.equal(this.title, that.title)
+                && Objects.equal(this.director, that.director)
+                && Objects.equal(this.year, that.year);
     }
 
     /**
@@ -76,8 +120,9 @@ public class Field {
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
-                      .add("name", name)
-                      .add("value", value)
+                      .add("title", title)
+                      .add("director", director)
+                      .add("year", year)
                       .toString();
     }
 }

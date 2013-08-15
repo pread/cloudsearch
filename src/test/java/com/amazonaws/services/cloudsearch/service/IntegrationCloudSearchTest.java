@@ -3,11 +3,13 @@ package com.amazonaws.services.cloudsearch.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.amazonaws.services.cloudsearch.common.json.JsonUtils;
 import com.amazonaws.services.cloudsearch.model.sdf.Field;
 import com.amazonaws.services.cloudsearch.model.sdf.SearchDocumentAdd;
 import com.amazonaws.services.cloudsearch.model.sdf.SearchDocumentFormat;
 import com.amazonaws.services.cloudsearch.model.search.SearchResponse;
 import com.amazonaws.services.cloudsearch.model.upload.UploadResponse;
+import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +23,11 @@ import com.amazonaws.services.cloudsearch.AmazonCloudSearchClient;
 import com.amazonaws.services.cloudsearch.model.DescribeDomainsResult;
 import com.amazonaws.services.cloudsearch.model.DomainStatus;
 
+import org.apache.log4j.Logger;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -35,6 +41,8 @@ import static org.junit.Assert.assertNotNull;
 		"classpath*:META-INF/spring/root-context.xml",
 		"classpath*:META-INF/spring/applicationContext*.xml" })
 public class IntegrationCloudSearchTest {
+
+    private static Logger LOG = Logger.getLogger(IntegrationCloudSearchTest.class);
 
     @Autowired(required=true)
     @Qualifier("cloudSearchClient")
@@ -171,53 +179,51 @@ public class IntegrationCloudSearchTest {
 
             SearchDocumentFormat item = new SearchDocumentFormat();
             List<SearchDocumentAdd> documents = new ArrayList<SearchDocumentAdd>();
-            List<Field> fields = new ArrayList<Field>();
 
-            Field title = new Field();
-            title.setName("title");
-            title.setValue("The Seeker: The Dark Is Rising");
-            fields.add(title);
+            Field fields = new Field();
+            fields.setTitle("The Seeker: The Dark Is Rising");
+            fields.setDirector("Cunningham, David L.");
+            fields.setYear(Integer.valueOf(2007));
+            fields.setGenre(ImmutableList.of("Adventure","Drama","Fantasy","Thriller"));
+            fields.setActor(ImmutableList.of("McShane, Ian","Eccleston, Christopher","Conroy, Frances","Ludwig, Alexander","Crewson, Wendy","Warner, Amelia","Cosmo, James","Hickey, John Benjamin","Piddock, Jim","Lockhart, Emma"));
 
-            Field director = new Field();
-            title.setName("director");
-            title.setValue("Cunningham, David L.");
-            fields.add(director);
-
-            Field year = new Field();
-            title.setName("year");
-            title.setValue("2007");
-            fields.add(year);
-
-            Field genre = new Field();
-            title.setName("year");
-            title.setValue("2007");
-            fields.add(genre);
+            Field fields2 = new Field();
+            fields2.setTitle("Emma");
+            fields2.setDirector("McGrath, Douglas");
+            fields2.setYear(Integer.valueOf(1996));
+            fields2.setGenre(ImmutableList.of("Comedy","Romance"));
+            fields2.setActor(ImmutableList.of("Paltrow, Gwyneth","Cumming, Alan","Collette, Toni","Northam, Jeremy","Scacchi, Greta","Cosmo, James","Thompson, Sophie","Law, Phyllida","Boardman, Lee","Byron, Kathleen","Hawthorne, Denys"));
 
             SearchDocumentAdd z = new SearchDocumentAdd();
             z.setId("tt0484562");
             z.setVersion("2");
+            z.setLang("en");
             z.setFields(fields);
+
+            SearchDocumentAdd z2 = new SearchDocumentAdd();
+            z2.setId("tt0116191");
+            z2.setVersion("2");
+            z2.setLang("en");
+            z2.setFields(fields2);
+
             documents.add(z);
+            documents.add(z2);
 
             item.setSearchDocumentAdds(documents);
 
-//            [{
-//                "type": "add",
-//                        "id": "tt0484562",
-//                        "version": 2,
-//                        "lang": "en",
-//                        "fields": {
-//                    "title": "The Seeker: The Dark Is Rising",
-//                            "director": "Cunningham, David L.",
-//                            "year": 2007,
-//                            "genre": ["Adventure", "Drama", "Fantasy", "Thriller"],
-//                    "actor": ["McShane, Ian", "Eccleston, Christopher", "Conroy, Frances", "Ludwig, Alexander", "Crewson, Wendy", "Warner, Amelia", "Cosmo, James", "Hickey, John Benjamin", "Piddock, Jim", "Lockhart, Emma"]
-//                }
-//            }]
+            LOG.debug("SDF Batch Upload Request : " + JsonUtils.marshal(item.getSearchDocumentAdds()));
 
             UploadResponse result = cloudSearchService.batch(item);
 
+            LOG.debug("SDF Batch Upload Response : " + JsonUtils.marshal(result));
+
             assertNotNull(result);
+            assertEquals("success", result.getStatus());
+            assertTrue(result.getAdds() == 2);
+            assertTrue(result.getDeletes() == 0);
+            assertTrue(result.getErrors().size() == 0);
+            assertTrue(result.getWarnings().size() == 0);
+
         }
     }
 

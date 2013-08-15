@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
  */
 public class JsonObjectMapper extends ObjectMapper {
 	
-	private static final SimpleDateFormat TIA_DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+	private static final SimpleDateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
 	/**
 	 * Instantiates a new json object mapper.
@@ -24,10 +24,9 @@ public class JsonObjectMapper extends ObjectMapper {
 	public JsonObjectMapper() {
 		super();
         this.getJsonFactory().setCharacterEscapes(new SMRCharacterEscapes());
-	    this.configure(SerializationConfig.Feature.INDENT_OUTPUT, false);	    
-	    this.setDateFormat(TIA_DATE_TIME_FORMAT);
-        this.setSerializationInclusion(JsonSerialize.Inclusion.ALWAYS);
-        this.enableDefaultTyping(DefaultTyping.JAVA_LANG_OBJECT);
+	    this.configure(SerializationConfig.Feature.INDENT_OUTPUT, false);
+	    this.setDateFormat(DATETIME_FORMAT);
+        this.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
         this.configure(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE, false);
         this.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, true);
         this.configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS, false);

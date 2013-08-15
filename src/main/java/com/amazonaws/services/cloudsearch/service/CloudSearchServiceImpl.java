@@ -3,6 +3,7 @@ package com.amazonaws.services.cloudsearch.service;
 import static com.amazonaws.services.cloudsearch.model.enums.CloudSearchQueryParam.*;
 import static com.amazonaws.services.cloudsearch.common.constant.CloudSearchEndpointConstants.*;
 
+import com.amazonaws.services.cloudsearch.common.json.JsonUtils;
 import com.amazonaws.services.cloudsearch.model.sdf.SearchDocumentFormat;
 import com.amazonaws.services.cloudsearch.model.search.SearchResponse;
 import com.amazonaws.services.cloudsearch.model.upload.UploadResponse;
@@ -127,7 +128,9 @@ public class CloudSearchServiceImpl implements CloudSearchService {
         cc.getInInterceptors().add(new LoggingInInterceptor());
         cc.getOutInterceptors().add(new LoggingOutInterceptor());
 
-        Response response = wc.path(ROOT + BATCH).post(item);
+        String json = JsonUtils.marshal(item.getSearchDocumentAdds());
+
+        Response response = wc.path(ROOT + BATCH).post(item.getSearchDocumentAdds());
 
         int status = (response == null) ? NO_CONTENT.getStatusCode() : response.getStatus();
 
@@ -135,12 +138,12 @@ public class CloudSearchServiceImpl implements CloudSearchService {
             return null;
         }
 
-        if (CREATED.getStatusCode() != status) {
-            throw new WebApplicationException(Response
-                    .status(BAD_REQUEST)
-                    .entity(new ErrorRepresentation(status, "Hard Request!"))
-                    .build());
-        }
+//        if (OK.getStatusCode() != status) {
+//            throw new WebApplicationException(Response
+//                    .status(BAD_REQUEST)
+//                    .entity(new ErrorRepresentation(status, "Hard Request!"))
+//                    .build());
+//        }
 
         return response.readEntity(UploadResponse.class);
     }

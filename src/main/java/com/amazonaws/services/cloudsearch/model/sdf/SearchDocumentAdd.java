@@ -1,19 +1,3 @@
-/* Copyright (c) 2010 HomeAway, Inc.
- * All rights reserved.  http://homeaway.github.io/thunderhead
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.amazonaws.services.cloudsearch.model.sdf;
 
 import com.google.common.base.Objects;
@@ -23,7 +7,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.util.List;
 
 /**
  * This objects represents the add type in an SDF.
@@ -31,6 +14,10 @@ import java.util.List;
 @XmlType(name = "Add")
 @XmlRootElement(name = "add")
 public class SearchDocumentAdd {
+
+    /** The id for the add operation */
+    @JsonProperty("type")
+    private String type = "add";
 
     /** The id for the add operation */
     @XmlAttribute(name = "id")
@@ -50,11 +37,20 @@ public class SearchDocumentAdd {
     /** A list of fields to be indexed */
     @XmlElement(name = "fields")
     @JsonProperty("fields")
-    private List<Field> fields;
+    private Field fields;
 
     /****************************** */
     /*    Getters and Setters       */
     /****************************** */
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getId() {
         return id;
     }
@@ -79,11 +75,11 @@ public class SearchDocumentAdd {
         this.lang = lang;
     }
 
-    public List<Field> getFields() {
+    public Field getFields() {
         return fields;
     }
 
-    public void setFields(final List<Field> fields) {
+    public void setFields(Field fields) {
         this.fields = fields;
     }
 

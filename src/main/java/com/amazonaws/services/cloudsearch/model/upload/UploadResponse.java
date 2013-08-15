@@ -1,12 +1,15 @@
 package com.amazonaws.services.cloudsearch.model.upload;
 
+import com.amazonaws.services.cloudsearch.model.sdf.Message;
 import com.google.common.base.Objects;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +34,14 @@ public class UploadResponse {
     /** Any errors encountered in POSTing to the cloudsearch domain */
     @XmlElementWrapper(name = "errors")
     @XmlElement(name = "error")
-    private List<String> errors;
+    @JsonProperty("errors")
+    private List<Message> errors = new ArrayList<Message>();
+
+    /** Any warnings encountered in POSTing to the cloudsearch domain */
+    @XmlElementWrapper(name = "warnings")
+    @XmlElement(name = "warnings")
+    @JsonProperty("warnings")
+    private List<Message> warnings = new ArrayList<Message>();
 
     public String getStatus() {
         return status;
@@ -57,12 +67,20 @@ public class UploadResponse {
         this.deletes = deletes;
     }
 
-    public List<String> getErrors() {
+    public List<Message> getErrors() {
         return errors;
     }
 
-    public void setErrors(final List<String> errors) {
+    public void setErrors(final List<Message> errors) {
         this.errors = errors;
+    }
+
+    public List<Message> getWarnings() {
+        return warnings;
+    }
+
+    public void setWarnings(List<Message> warnings) {
+        this.warnings = warnings;
     }
 
     /**
