@@ -9,5 +9,6 @@ public class CloudSearchEndpointConstants {
 
     public static final String ROOT = "/2011-02-01";
     public static final String SEARCH = "/search";
+    public static final String BATCH = "/documents/batch";
 
 }

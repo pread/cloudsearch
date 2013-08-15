@@ -17,6 +17,7 @@
 package com.amazonaws.services.cloudsearch.model.sdf;
 
 import com.google.common.base.Objects;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -33,18 +34,22 @@ public class SearchDocumentAdd {
 
     /** The id for the add operation */
     @XmlAttribute(name = "id")
+    @JsonProperty("id")
     private String id;
 
     /** The version for the add operation */
     @XmlAttribute(name = "version")
+    @JsonProperty("version")
     private String version;
 
     /** The language associated with the add operation */
     @XmlAttribute(name = "lang")
+    @JsonProperty("lang")
     private String lang;
 
     /** A list of fields to be indexed */
-    @XmlElement(name = "field")
+    @XmlElement(name = "fields")
+    @JsonProperty("fields")
     private List<Field> fields;
 
     /****************************** */
