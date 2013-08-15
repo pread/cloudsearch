@@ -3,40 +3,29 @@ package com.amazonaws.services.cloudsearch.model.sdf;
 import com.google.common.base.Objects;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
  * This object representation the fields to be indexed in the SDF
  */
-@XmlType(name = "Field")
-@XmlRootElement(name = "field")
 public class Field {
 
     /** The name of the field found */
-    @XmlAttribute(name = "title")
     @JsonProperty("title")
     private String title;
 
     /** The name of the field found */
-    @XmlAttribute(name = "director")
     @JsonProperty("director")
     private String director;
 
-    /** The name of the field found */
-    @XmlAttribute(name = "year")
     @JsonProperty("year")
     private Integer year;
 
     /** The name of the field found */
-    @XmlAttribute(name = "genre")
     @JsonProperty("genre")
     private List<String> genre;
 
     /** The name of the field found */
-    @XmlAttribute(name = "actor")
     @JsonProperty("actor")
     private List<String> actor;
 

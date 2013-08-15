@@ -1,0 +1,77 @@
+<batch xmlns="http://cloudsearch.amazonaws.com/2011-02-01/results" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://cloudsearch.amazonaws.com/2011-02-01/results ">
+    <add id="tt0484562" version="2" lang="en">
+        <field name="title">The Seeker: The Dark Is Rising</field>
+        <field name="year">2007</field>
+        <field name="director">Cunningham, David L.</field>
+        <field name="genre">Adventure</field>
+        <field name="genre">Drama</field>
+        <field name="genre">Fantasy</field>
+        <field name="genre">Thriller</field>
+        <field name="actor">McShane, Ian</field>
+        <field name="actor">Eccleston, Christopher</field>
+        <field name="actor">Conroy, Frances</field>
+        <field name="actor">Ludwig, Alexander</field>
+        <field name="actor">Crewson, Wendy</field>
+        <field name="actor">Warner, Amelia</field>
+        <field name="actor">Cosmo, James</field>
+        <field name="actor">Hickey, John Benjamin</field>
+        <field name="actor">Piddock, Jim</field>
+        <field name="actor">Lockhart, Emma</field>
+    </add>
+    <add id="tt0301199" version="2" lang="en">
+        <field name="title">Dirty Pretty Things</field>
+        <field name="year">2002</field>
+        <field name="director">Frears, Stephen</field>
+        <field name="genre">Crime</field>
+        <field name="genre">Drama</field>
+        <field name="genre">Thriller</field>
+        <field name="actor">Tautou, Audrey</field>
+        <field name="actor">Ejiofor, Chiwetel</field>
+        <field name="actor">Okonedo, Sophie</field>
+        <field name="actor">López, Sergi</field>
+        <field name="actor">Buric, Zlatko</field>
+        <field name="actor">Oparei, Deobia</field>
+        <field name="actor">Scarborough, Adrian</field>
+        <field name="actor">Wong, Benedict</field>
+        <field name="actor">Altin, Josef</field>
+        <field name="actor">Écoffey, Jean-Philippe</field>
+        <field name="actor">Kouyaté, Sotigui</field>
+        <field name="actor">Dosanjh, Kriss</field>
+        <field name="actor">Edwards, Jeillo</field>
+        <field name="actor">Younger, Damon</field>
+        <field name="actor">Mellinger, Michael</field>
+        <field name="actor">Donn, Ray</field>
+        <field name="actor">Karanj, Nizwar</field>
+        <field name="actor">Ali, Barber</field>
+        <field name="actor">Dumezweni, Noma</field>
+        <field name="actor">Bhattacharjee, Paul</field>
+    </add>
+    <add id="tt0454084" version="2" lang="en">
+        <field name="title">Blind Dating</field>
+        <field name="year">2006</field>
+        <field name="director">Keach, James</field>
+        <field name="genre">Comedy</field>
+        <field name="genre">Romance</field>
+        <field name="actor">Pine, Chris</field>
+        <field name="actor">Mixon, Katy</field>
+        <field name="actor">Seymour, Jane</field>
+        <field name="actor">Tobolowsky, Stephen</field>
+        <field name="actor">Thomas, Eddie Kaye</field>
+        <field name="actor">Hall, Pooch</field>
+        <field name="actor">Alden, Jennifer</field>
+        <field name="actor">Jay, Anjali</field>
+        <field name="actor">Rogers, Austin</field>
+        <field name="actor">Hawker, Kari</field>
+        <field name="actor">Halford, Charles</field>
+        <field name="actor">Gerrish, Frank</field>
+        <field name="actor">Klekas, Jennifer</field>
+        <field name="actor">Gerald, K. Danor</field>
+        <field name="actor">Yates, Ashlyn</field>
+        <field name="actor">Patel, Jaysha</field>
+        <field name="actor">Ligairi, Joshua</field>
+        <field name="actor">Macaluso, Dee</field>
+        <field name="actor">Wellington, Steve</field>
+        <field name="actor">Umberger, Megan</field>
+    </add>
+</batch>

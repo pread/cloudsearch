@@ -14,6 +14,23 @@
           http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
           http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
 
+    <!-- the camel context -->
+    <camel:camelContext id="cxfrs_context" trace="true" streamCache="false">
+
+        <camel:contextScan/>
+
+        <!-- Catch the authorization exception and set the Access Denied message back -->
+        <camel:onException>
+            <camel:exception>org.apache.camel.CamelAuthorizationException</camel:exception>
+            <camel:handled>
+                <camel:constant>true</camel:constant>
+            </camel:handled>
+            <camel:transform>
+                <camel:simple>Access Denied with the Policy of ${exception.policyId} !</camel:simple>
+            </camel:transform>
+        </camel:onException>
+
+    </camel:camelContext>
 
 
 </beans>
