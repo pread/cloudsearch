@@ -3,7 +3,7 @@ package com.amazonaws.services.cloudsearch.service;
 import static com.amazonaws.services.cloudsearch.model.enums.CloudSearchQueryParam.*;
 import static com.amazonaws.services.cloudsearch.common.constant.CloudSearchEndpointConstants.*;
 
-import com.amazonaws.services.cloudsearch.common.json.JsonUtils;
+import com.amazonaws.services.cloudsearch.model.sdf.SearchDocumentAdd;
 import com.amazonaws.services.cloudsearch.model.sdf.SearchDocumentFormat;
 import com.amazonaws.services.cloudsearch.model.search.SearchResponse;
 import com.amazonaws.services.cloudsearch.model.upload.UploadResponse;
@@ -12,6 +12,8 @@ import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.client.Client;
 import org.apache.cxf.jaxrs.client.ClientConfiguration;
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.apache.cxf.transport.http.HTTPConduit;
+import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.amazonaws.services.cloudsearch.common.exception.ErrorRepresentation;
@@ -21,6 +23,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import static javax.ws.rs.core.Response.Status.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * HTTP REST client for consuming AWS Cloud Search services.
@@ -113,6 +116,10 @@ public class CloudSearchServiceImpl implements CloudSearchService {
     }
 
     public UploadResponse batch(SearchDocumentFormat item) {
+        return batch(item.getSearchDocumentAdds());
+    }
+
+    public UploadResponse batch(List<SearchDocumentAdd> items) {
 
         Date today = new Date();
 
@@ -128,9 +135,13 @@ public class CloudSearchServiceImpl implements CloudSearchService {
         cc.getInInterceptors().add(new LoggingInInterceptor());
         cc.getOutInterceptors().add(new LoggingOutInterceptor());
 
-        String json = JsonUtils.marshal(item.getSearchDocumentAdds());
+        HTTPConduit http = WebClient.getConfig(wc).getHttpConduit();
+        HTTPClientPolicy httpClientPolicy = new HTTPClientPolicy();
+        httpClientPolicy.setConnectionTimeout(36000);
+        httpClientPolicy.setAllowChunking(false);
+        http.setClient(httpClientPolicy);
 
-        Response response = wc.path(ROOT + BATCH).post(item.getSearchDocumentAdds());
+        Response response = wc.path(ROOT + BATCH).post(items);
 
         int status = (response == null) ? NO_CONTENT.getStatusCode() : response.getStatus();
 

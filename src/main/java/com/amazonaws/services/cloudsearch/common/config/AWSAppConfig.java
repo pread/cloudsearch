@@ -5,6 +5,8 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.cloudsearch.AmazonCloudSearchClient;
+import com.amazonaws.services.cloudsearch.common.json.JsonObjectMapper;
+import com.amazonaws.services.cloudsearch.rest.CloudSearchReadResource;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.ec2.AmazonEC2;
 import com.amazonaws.services.ec2.AmazonEC2Client;
@@ -18,8 +20,7 @@ import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.amazonaws.services.cloudsearch.common.json.JsonObjectMapper;
-import com.amazonaws.services.cloudsearch.rest.CloudSearchReadResource;
+import org.springframework.context.annotation.ImportResource;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,6 +29,8 @@ import java.util.List;
  * The Class AppConfig.
  */
 @Configuration
+@ImportResource({"classpath*:META-INF/spring/root-context.xml",
+                "classpath*:META-INF/spring/applicationContext*.xml"})
 public class AWSAppConfig {
 
 	/** The key. */
