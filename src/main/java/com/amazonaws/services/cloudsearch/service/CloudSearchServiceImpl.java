@@ -149,13 +149,6 @@ public class CloudSearchServiceImpl implements CloudSearchService {
             return null;
         }
 
-//        if (OK.getStatusCode() != status) {
-//            throw new WebApplicationException(Response
-//                    .status(BAD_REQUEST)
-//                    .entity(new ErrorRepresentation(status, "Hard Request!"))
-//                    .build());
-//        }
-
         return response.readEntity(UploadResponse.class);
     }
 

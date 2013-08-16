@@ -1,13 +1,11 @@
 package com.amazonaws.services.cloudsearch.main;
 
-import com.amazonaws.services.cloudsearch.common.config.AWSAppConfig;
 import com.amazonaws.services.cloudsearch.integration.aggregation.SdfAggregationStrategy;
 import com.amazonaws.services.cloudsearch.model.sdf.SearchDocumentAdd;
 import com.amazonaws.services.cloudsearch.model.sdf.SearchDocumentAddJson;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.spring.Main;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.apache.camel.language.tokenizer.TokenizeLanguage.tokenizeXML;
 
@@ -19,17 +17,6 @@ import static org.apache.camel.language.tokenizer.TokenizeLanguage.tokenizeXML;
 public class SDFUploadMain {
 
     private Main main;
-
-    /*
-
-        // to load Spring XML file
-        main.setApplicationContextUri("META-INF/spring/*.xml");
-        AnnotationConfigApplicationContext ctx =
-                new AnnotationConfigApplicationContext();
-
-        ctx.register(AWSAppConfig.class);
-        ctx.refresh();
-     */
 
     public static void main(String[] args) throws Exception {
         SDFUploadMain example = new SDFUploadMain();
@@ -55,6 +42,7 @@ public class SDFUploadMain {
     }
 
     private static class MyRouteBuilder extends RouteBuilder {
+
         @Override
         public void configure() {
 
