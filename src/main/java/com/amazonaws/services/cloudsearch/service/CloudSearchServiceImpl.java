@@ -53,6 +53,10 @@ public class CloudSearchServiceImpl implements CloudSearchService {
         cc.getInInterceptors().add(new LoggingInInterceptor());
         cc.getOutInterceptors().add(new LoggingOutInterceptor());
 
+        HTTPConduit http = WebClient.getConfig(wc).getHttpConduit();
+        http.getClient().setProxyServer("stev.proxy.corp.sopra");
+        http.getClient().setProxyServerPort(8080);
+
         SearchResponse result = wc.path(ROOT + SEARCH)
                 .query(Q.getName(), q)
                 .query(START.getName(), start)
@@ -91,6 +95,10 @@ public class CloudSearchServiceImpl implements CloudSearchService {
         cc.getInFaultInterceptors().add(new LoggingInInterceptor());
         cc.getInInterceptors().add(new LoggingInInterceptor());
         cc.getOutInterceptors().add(new LoggingOutInterceptor());
+
+        HTTPConduit http = WebClient.getConfig(wc).getHttpConduit();
+        http.getClient().setProxyServer("stev.proxy.corp.sopra");
+        http.getClient().setProxyServerPort(8080);
 
         SearchResponse result = wc.path(ROOT + SEARCH)
                 .query(BQ.getName(), bq)
@@ -140,6 +148,9 @@ public class CloudSearchServiceImpl implements CloudSearchService {
         httpClientPolicy.setConnectionTimeout(36000);
         httpClientPolicy.setAllowChunking(false);
         http.setClient(httpClientPolicy);
+
+        http.getClient().setProxyServer("stev.proxy.corp.sopra");
+        http.getClient().setProxyServerPort(8080);
 
         Response response = wc.path(ROOT + BATCH).post(items);
 

@@ -2,8 +2,6 @@ package com.amazonaws.services.cloudsearch.common.config;
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Region;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.cloudsearch.AmazonCloudSearchClient;
 import com.amazonaws.services.cloudsearch.common.json.JsonObjectMapper;
 import com.amazonaws.services.cloudsearch.rest.CloudSearchReadResource;
@@ -97,8 +95,7 @@ public class AWSAppConfig {
      */
     public @Bean AmazonEC2 ec2Client() {
     	AmazonEC2Client ec2 = new AmazonEC2Client(awsCredentials(), clientConfiguration());
-        Region region = Region.getRegion(Regions.EU_WEST_1);
-        ec2.setRegion(region);
+        ec2.setEndpoint(ec2Endpoint);
         return ec2;
     }
     
@@ -109,8 +106,7 @@ public class AWSAppConfig {
      */
     public @Bean AmazonSNSClient snsClient() {
     	AmazonSNSClient sns = new AmazonSNSClient(awsCredentials(), clientConfiguration());
-        Region region = Region.getRegion(Regions.EU_WEST_1);
-        sns.setRegion(region);
+        sns.setEndpoint(snsEndpoint);
         return sns;
     }
     
@@ -121,8 +117,7 @@ public class AWSAppConfig {
      */
     public @Bean AmazonSimpleDBClient sdbClient() {
     	AmazonSimpleDBClient sdb = new AmazonSimpleDBClient(awsCredentials(), clientConfiguration());
-        Region region = Region.getRegion(Regions.EU_WEST_1);
-        sdb.setRegion(region);
+        sdb.setEndpoint(sdbEndpoint);
         return sdb;
     }
     
@@ -133,8 +128,7 @@ public class AWSAppConfig {
      */
     public @Bean AmazonS3Client s3Client() {
     	AmazonS3Client s3 = new AmazonS3Client(awsCredentials(), clientConfiguration());
-        Region region = Region.getRegion(Regions.EU_WEST_1);
-        s3.setRegion(region);
+        s3.setEndpoint(s3Endpoint);
         return s3;
     }
 
@@ -145,24 +139,21 @@ public class AWSAppConfig {
      */
     public @Bean AmazonRDSClient rdsClient() {
     	AmazonRDSClient rds = new AmazonRDSClient(awsCredentials(), clientConfiguration());
-        Region region = Region.getRegion(Regions.EU_WEST_1);
-        rds.setRegion(region);
+        rds.setEndpoint(rdsEndpoint);
         return rds;
     }
 
     public @Bean
     AmazonDynamoDBClient dynamoDBClient() {
         AmazonDynamoDBClient dynamoDB = new AmazonDynamoDBClient(awsCredentials(), clientConfiguration());
-        Region region = Region.getRegion(Regions.EU_WEST_1);
-        dynamoDB.setRegion(region);
+        dynamoDB.setEndpoint(dynamoDBEndpoint);
         return dynamoDB;
     }
 
     public @Bean
     AmazonCloudSearchClient cloudSearchClient() {
         AmazonCloudSearchClient cloudSearch = new AmazonCloudSearchClient(awsCredentials(), clientConfiguration());
-        Region region = Region.getRegion(Regions.EU_WEST_1);
-        cloudSearch.setRegion(region);
+        cloudSearch.setEndpoint(cloudSearchEndpoint);
         return cloudSearch;
     }
 
