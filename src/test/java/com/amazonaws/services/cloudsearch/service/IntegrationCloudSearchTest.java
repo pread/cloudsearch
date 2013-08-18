@@ -113,7 +113,7 @@ public class IntegrationCloudSearchTest {
             System.out.println("Number of searchable documents for " + domainStatus.getDomainName() + " is " + domainStatus.getNumSearchableDocs());
             int start = 0;
             String query = "(and actor:'Carrie Fisher' genre:'Horror')";
-            // actor:'-Cushing+Harrison Ford'
+
             String returnFields = "actor%2Cdirector%2Ctitle%2Cyear%2Ctext_relevance";
             String facet = "genre";
             SearchResponse searchResponse = cloudSearchService.cloudSearchBooleanQuery(query, returnFields, start, facet);
@@ -182,14 +182,14 @@ public class IntegrationCloudSearchTest {
             Field fields = new Field();
             fields.setTitle("The Seeker: The Dark Is Rising");
             fields.setDirector("Cunningham, David L.");
-            fields.setYear(Integer.valueOf(2007));
+            fields.setYear(2007);
             fields.setGenre(ImmutableList.of("Adventure","Drama","Fantasy","Thriller"));
             fields.setActor(ImmutableList.of("McShane, Ian","Eccleston, Christopher","Conroy, Frances","Ludwig, Alexander","Crewson, Wendy","Warner, Amelia","Cosmo, James","Hickey, John Benjamin","Piddock, Jim","Lockhart, Emma"));
 
             Field fields2 = new Field();
             fields2.setTitle("Emma");
             fields2.setDirector("McGrath, Douglas");
-            fields2.setYear(Integer.valueOf(1996));
+            fields2.setYear(1996);
             fields2.setGenre(ImmutableList.of("Comedy","Romance"));
             fields2.setActor(ImmutableList.of("Paltrow, Gwyneth","Cumming, Alan","Collette, Toni","Northam, Jeremy","Scacchi, Greta","Cosmo, James","Thompson, Sophie","Law, Phyllida","Boardman, Lee","Byron, Kathleen","Hawthorne, Denys"));
 

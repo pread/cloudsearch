@@ -1,4 +1,4 @@
-package com.amazonaws.services.cloudsearch.integration.converter;
+package com.amazonaws.services.cloudsearch.mediation.converter;
 
 import com.amazonaws.services.cloudsearch.model.sdf.Field;
 import com.amazonaws.services.cloudsearch.model.sdf.FieldElement;

@@ -1,4 +1,4 @@
-package com.amazonaws.services.cloudsearch.integration.aggregation;
+package com.amazonaws.services.cloudsearch.mediation.aggregation;
 
 import java.util.ArrayList;
 import java.util.List;

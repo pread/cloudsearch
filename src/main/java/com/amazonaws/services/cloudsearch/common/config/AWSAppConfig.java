@@ -18,7 +18,6 @@ import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,8 +26,6 @@ import java.util.List;
  * The Class AppConfig.
  */
 @Configuration
-@ImportResource({"classpath*:META-INF/spring/root-context.xml",
-                "classpath*:META-INF/spring/applicationContext*.xml"})
 public class AWSAppConfig {
 
 	/** The key. */
