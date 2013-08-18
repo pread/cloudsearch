@@ -20,7 +20,6 @@ import static org.apache.camel.language.tokenizer.TokenizeLanguage.tokenizeXML;
 public class SDFUploadMain {
 
     /** The log. */
-    //private static Logger LOG = Logger.getLogger(SDFUploadMain.class);
     private static Log LOG = LogFactory.getLog(SDFUploadMain.class);
 
     public static void main(String[] args) throws Exception {
