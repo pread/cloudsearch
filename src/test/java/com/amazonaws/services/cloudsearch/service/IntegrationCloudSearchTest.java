@@ -83,7 +83,7 @@ public class IntegrationCloudSearchTest {
 
                 int count = searchResponse.getFound().getCount();
                 int hits = searchResponse.getFound().getHits().size();
-                System.out.println("Start position " + start + ". Found " + hits + " of " + count + " matches for query [" + query + "]");
+                LOG.info("Start position " + start + ". Found " + hits + " of " + count + " matches for query [" + query + "]");
                 if ((start + 10) > count || hits == 0) {
                     break;
                 }
@@ -113,7 +113,7 @@ public class IntegrationCloudSearchTest {
 
             int count = searchResponse.getFound().getCount();
             int hits = searchResponse.getFound().getHits().size();
-            System.out.println("Start position " + start + ". Found " + hits + " of " + count + " matches for query [" + query + "]");
+            LOG.info("Start position " + start + ". Found " + hits + " of " + count + " matches for query [" + query + "]");
         }
 
     }
@@ -136,7 +136,7 @@ public class IntegrationCloudSearchTest {
                 SearchResponse searchResponse = cloudSearchService.cloudSearchBooleanQuery(query, returnFields, start, facet);
                 int count = searchResponse.getFound().getCount();
                 int hits = searchResponse.getFound().getHits().size();
-                System.out.println("Start position " + start + ". Found " + hits + " of " + count + " matches for query [" + query + "]");
+                LOG.info("Start position " + start + ". Found " + hits + " of " + count + " matches for query [" + query + "]");
 
                 if ((start + 10) > count || hits == 0) {
                     break;
