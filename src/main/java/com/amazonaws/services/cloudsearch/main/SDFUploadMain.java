@@ -34,7 +34,7 @@ public class SDFUploadMain {
         main.enableHangupSupport();
 
         // add routes
-        //main.addRouteBuilder(new MyRouteBuilder());
+        main.addRouteBuilder(new MyRouteBuilder());
 
         // run until you terminate the JVM
         System.out.println("Starting Camel. Use ctrl + c to terminate the JVM.\n");
@@ -43,7 +43,6 @@ public class SDFUploadMain {
 
     private static class MyRouteBuilder extends RouteBuilder {
 
-        @Override
         public void configure() {
 
             from("file:data/inbox?noop=true")
@@ -55,7 +54,6 @@ public class SDFUploadMain {
                     .to("bean:cloudSearchService?method=batch")
                     .marshal().json(JsonLibrary.Jackson)
                     .to("stream:out")
-                            //.to("activemq:queue:order")
                     .log("<------- Exiting Camel Route for processing SDF file");
         }
     }
