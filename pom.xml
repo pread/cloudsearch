@@ -34,7 +34,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <aws.sdk.version>[1.4.1,)</aws.sdk.version>
+        <aws.sdk.version>[1.5.4,)</aws.sdk.version>
         <httpcomponents.version>4.2.3</httpcomponents.version>
         <java.version>1.7</java.version>
         <aspectj.version>1.6.11</aspectj.version>

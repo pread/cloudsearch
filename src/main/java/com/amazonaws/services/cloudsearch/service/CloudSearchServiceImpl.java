@@ -7,6 +7,7 @@ import com.amazonaws.services.cloudsearch.model.sdf.SearchDocumentAdd;
 import com.amazonaws.services.cloudsearch.model.sdf.SearchDocumentFormat;
 import com.amazonaws.services.cloudsearch.model.search.SearchResponse;
 import com.amazonaws.services.cloudsearch.model.upload.UploadResponse;
+import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.client.Client;
@@ -15,6 +16,7 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.amazonaws.services.cloudsearch.common.exception.ErrorRepresentation;
 import com.amazonaws.services.cloudsearch.rest.CloudSearchReadResource;
@@ -37,9 +39,16 @@ public class CloudSearchServiceImpl implements CloudSearchService {
     @Autowired(required = true)
     private CloudSearchReadResource proxyCloudSearchRead;
 
+    /** The proxy port. */
+    @Value("${aws.proxyPort}") private String proxyPort;
+
+    /** The proxy host. */
+    @Value("${aws.proxyHost}") private String proxyHost;
+
     public SearchResponse cloudSearchRead(String q, String returnFields, int start, String facet) {
 
         Date today = new Date();
+        int proxyPortInt = StringUtils.isEmpty(proxyPort) ? 0 : Integer.valueOf(proxyPort);
 
         Client client = WebClient.client(proxyCloudSearchRead)
                 .type("application/json")
@@ -54,8 +63,8 @@ public class CloudSearchServiceImpl implements CloudSearchService {
         cc.getOutInterceptors().add(new LoggingOutInterceptor());
 
         HTTPConduit http = WebClient.getConfig(wc).getHttpConduit();
-        http.getClient().setProxyServer("stev.proxy.corp.sopra");
-        http.getClient().setProxyServerPort(8080);
+        http.getClient().setProxyServer(proxyHost);
+        http.getClient().setProxyServerPort(proxyPortInt);
 
         SearchResponse result = wc.path(ROOT + SEARCH)
                 .query(Q.getName(), q)
@@ -83,6 +92,7 @@ public class CloudSearchServiceImpl implements CloudSearchService {
     public SearchResponse cloudSearchBooleanQuery(String bq, String returnFields, int start, String facet) {
 
         Date today = new Date();
+        int proxyPortInt = StringUtils.isEmpty(proxyPort) ? 0 : Integer.valueOf(proxyPort);
 
         Client client = WebClient.client(proxyCloudSearchRead)
                 .type("application/json")
@@ -97,8 +107,8 @@ public class CloudSearchServiceImpl implements CloudSearchService {
         cc.getOutInterceptors().add(new LoggingOutInterceptor());
 
         HTTPConduit http = WebClient.getConfig(wc).getHttpConduit();
-        http.getClient().setProxyServer("stev.proxy.corp.sopra");
-        http.getClient().setProxyServerPort(8080);
+        http.getClient().setProxyServer(proxyHost);
+        http.getClient().setProxyServerPort(proxyPortInt);
 
         SearchResponse result = wc.path(ROOT + SEARCH)
                 .query(BQ.getName(), bq)
@@ -130,6 +140,7 @@ public class CloudSearchServiceImpl implements CloudSearchService {
     public UploadResponse batch(List<SearchDocumentAdd> items) {
 
         Date today = new Date();
+        int proxyPortInt = StringUtils.isEmpty(proxyPort) ? 0 : Integer.valueOf(proxyPort);
 
         Client client = WebClient.client(proxyCloudSearchRead)
                 .type("application/json")
@@ -149,8 +160,8 @@ public class CloudSearchServiceImpl implements CloudSearchService {
         httpClientPolicy.setAllowChunking(false);
         http.setClient(httpClientPolicy);
 
-        http.getClient().setProxyServer("stev.proxy.corp.sopra");
-        http.getClient().setProxyServerPort(8080);
+        http.getClient().setProxyServer(proxyHost);
+        http.getClient().setProxyServerPort(proxyPortInt);
 
         Response response = wc.path(ROOT + BATCH).post(items);
 
@@ -159,7 +170,6 @@ public class CloudSearchServiceImpl implements CloudSearchService {
         if (NO_CONTENT.getStatusCode() == status) {
             return null;
         }
-
         return response.readEntity(UploadResponse.class);
     }
 
